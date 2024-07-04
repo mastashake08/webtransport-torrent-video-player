@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# WebTransport Torrent Theatre
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Watch Torrent videos in the browser securely over HTTP/3. Simply paste the magnet URI and a WebTransport stream will send the video data. Your ISP will not be any the wiser, anonymize your torrent experience.
 
 ## Setup
 
