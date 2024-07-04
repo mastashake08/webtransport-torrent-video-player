@@ -2,9 +2,13 @@ class Torrent {
     #_webTransport;
     #_datagramWriter;
     #_datagramReader;
-    constructor(url){
+    #_mediaSource;
+    #_sourceBuffer;
+    constructor(url, mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'){
        this.initTransport(url).then(() => {
         console.log(this.#_webTransport);
+        this.#_mediaSource = new MediaSource();
+        this.#_sourceBuffer = this.#_mediaSource.addSourceBuffer(mimeCodec);    
        });
     }
 
@@ -41,11 +45,18 @@ class Torrent {
           }
           // value is a Uint8Array
           console.log(value);
+          this.#_sourceBuffer.appendBuffer(value);
         }
       }
       
     
     writeData(data) {
+        this.#_sourceBuffer.addEventListener("updateend", () => {
+            this.#_mediaSource.endOfStream();
+            console.log(mediaSource.activeSourceBuffers);
+            
+            console.log(mediaSource.readyState); // ended
+            });
         this.#_datagramWriter.write(data);
     }
 }
